@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+</head>
+<body>
+<h3>
+    Question:
+</h3>
+<textarea style="margin-bottom: 10px; width: 50%; height: 100px;" id="text">
+</textarea>
+<h4>Answers</h4>
+<div style="display: flex;" class="answers">
+    <input type="checkbox" class="answer-check">
+    <textarea style="margin-bottom: 10px; width: 50%; height: 50px;" class="answer-input">
+</textarea>
+</div>
+<button style="display: flex; justify-content: center; align-items: center; background-color: transparent; padding: 5px;
+border: 2px solid black; width: 200px; cursor:pointer; margin-bottom: 10px;" id="add-answer">Thêm câu trả lời</button>
+<button style="display: flex; justify-content: center; align-items: center; padding: 5px;
+border: 2px solid black; width: 50px; cursor:pointer; margin-bottom: 20px;" id="submit">
+    Submit
+</button>
+<button style="display: flex; justify-content: center; align-items: center; padding: 5px;
+border: 2px solid black; width: 100px; cursor:pointer;" id="getContent">
+    Get Content
+</button>
+<div id="content">
+
+</div>
+</body>
+<style>
+    li{
+        list-style-type: none;
+        margin-left: 10px;
+    }
+</style>
+<script>
+
+    $(document).ready(function(){
+        let index = 1;
+        let char = 97;
+
+        $('#add-answer').click(function(){
+            $('.answers').last().after(`
+            <div style="display: flex;" class="answers">
+                <input type="checkbox" class="answer-check">
+                <textarea style="margin-bottom: 10px; width: 50%; height: 50px;" class="answer-input">
+            </textarea>
+            </div>`)
+        })
+        $("#submit").click(function(){
+            var answers = [];
+
+            for (let i = 0; i < $('.answer-check').length; i++) {
+                answers.push({
+                    answer: $('.answer-check')[i].nextElementSibling.value,
+                    is_true: $('.answer-check')[i].checked
+                })
+            }
+            var data = JSON.stringify({
+                question: $('#text').val(),
+                answers: answers
+            })
+            $.ajax({
+                type: "POST",
+                url: "/submit",
+                data: data,
+                success: function(data) {
+                    alert(data)
+                },
+                error: function(xhr, status, error) {
+                    alert(error);
+                }
+            });
+            $("#content").val('');
+
+        })
+        $("#getContent").click(function () {
+            $.ajax({
+                url: "/get",
+                success: function(data) {
+                    for (let i = 0; i < data.length; i++) {
+                        $("#content").append(`<p style="font-weight: bold;">${index}. ${data[i].question}</p><ul>`)
+                        for (let j = 0; j < data[i].answers.length; j++) {
+                            $("#content").append(`<li style="display: flex;">${String.fromCharCode(char)}. ${data[i].answers[j].answer}
+                            ${data[i].answers[j].is_true ? '<i class="fas fa-check"></i>' : ''}</li>`)
+                            char++
+                        }
+                        char = 97
+                        $("#content").append(`</ul>`)
+                        $('.answer-input').val('')
+                        $("#text").val('')
+                        index++
+                    }
+                    index = 1
+                },
+                error: function(xhr, status, error) {
+
+                }
+            });
+        })
+    })
+</script>
+</html>
