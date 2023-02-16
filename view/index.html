@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 </head>
 <body>
 <h3>
@@ -13,9 +15,11 @@
 <textarea style="margin-bottom: 10px; width: 50%; height: 100px;" id="text">
 </textarea>
 <h4>Answers</h4>
-<div style="display: flex;" class="answers">
+<div class="answers"></div>
+<div style="display: flex; align-items: center" class="answers">
     <input type="checkbox" class="answer-check">
-    <textarea style="margin-bottom: 10px; width: 50%; height: 50px;" class="answer-input">
+    <textarea style="margin-bottom: 10px; margin-right: 10px; width: 30%; height: 50px;" class="answer-input"></textarea>
+        <i class="fa fa-remove" onclick="this.parentElement.remove()" style="cursor: pointer;"></i>
 </textarea>
 </div>
 <button style="display: flex; justify-content: center; align-items: center; background-color: transparent; padding: 5px;
@@ -39,19 +43,23 @@ border: 2px solid black; width: 100px; cursor:pointer;" id="getContent">
     }
 </style>
 <script>
-
+    toastr.options = {
+        positionClass: 'toast-top-center'
+    };
     $(document).ready(function(){
         let index = 1;
         let char = 97;
 
         $('#add-answer').click(function(){
             $('.answers').last().after(`
-            <div style="display: flex;" class="answers">
+            <div style="display: flex; align-items: center" class="answers">
                 <input type="checkbox" class="answer-check">
-                <textarea style="margin-bottom: 10px; width: 50%; height: 50px;" class="answer-input">
+                <textarea style="margin-bottom: 10px; margin-right: 10px; width: 30%; height: 50px;" class="answer-input"></textarea>
+                <i class="fa fa-remove" onclick="this.parentElement.remove()" style="cursor: pointer;"></i>
             </textarea>
             </div>`)
         })
+
         $("#submit").click(function(){
             var answers = [];
 
@@ -70,13 +78,13 @@ border: 2px solid black; width: 100px; cursor:pointer;" id="getContent">
                 url: "/submit",
                 data: data,
                 success: function(data) {
-                    alert(data)
+                    toastr.success(data)
+                    $("#content").val('');
                 },
                 error: function(xhr, status, error) {
-                    alert(error);
+                    toastr.error(error);
                 }
             });
-            $("#content").val('');
 
         })
         $("#getContent").click(function () {
