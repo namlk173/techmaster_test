@@ -1,0 +1,64 @@
+1.	What is a go routine in Go? 
+
+a) A function that can run concurrently with other functions b) A type of data structure used for storing values 
+c) A way to define a new variable in Go
+
+
+Answer: a
+
+2.	Which keyword is used to start a new go routine in Go? 
+a) go 
+b) start 
+c) new
+Answer: a
+
+3.	What is a channel in Go? 
+a) A way to communicate between two or more go routines
+b) A way to store data in a database
+c) A way to define a new variable in Go
+Answer: a
+
+4.	Which of the following statements is true about channels in Go? 
+a) Channels can only be used for sending data, not receiving it 
+b) Channels can only be used for receiving data, not sending it 
+c) Channels can be used for both sending and receiving data
+Answer: c
+
+5.	Which keyword is used to send data over a channel in Go? a) send 
+b) push 
+c) <-
+Answer: c
+
+6.	Which keyword is used to receive data from a channel in Go? 
+a) receive 
+b) pull 
+c) <-
+Answer: c
+
+7.	What happens when a go routine tries to send data to a channel that is full? 
+a) The go routine blocks until space is available in the channel 
+b) The go routine discards the data and continues executing 
+c) The go routine terminates with an error
+Answer: a
+
+8.	What happens when a go routine tries to receive data from a channel that is empty? 
+
+a) The go routine blocks until data is available in the channel 
+b) The go routine returns a default value 
+c) The go routine terminates with an error
+Answer: a
+
+9.	How can you close a channel in Go? 
+a) Use the close() function on the channel 
+b) Use the stop() function on the channel 
+c) Use the exit() function on the channel
+Answer: a
+
+10.	What is a buffered channel in Go? 
+a) A channel with a fixed capacity that can hold multiple values 
+b) A channel that only allows one sender and one receiver 
+c) A type of channel that is used for passing errors between go routines
+
+
+Answer: a
+

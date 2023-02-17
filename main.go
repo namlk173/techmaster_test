@@ -1,14 +1,25 @@
 package main
 
 import (
-	"github.com/kataras/iris/v12"
+	"fmt"
 	"irishttp/model"
+	"log"
+
+	"github.com/kataras/iris/v12"
 )
 
 var quizzes = []model.Quiz{}
+var err error
 
 func main() {
 	app := iris.New()
+	quizzes, err = model.GetQuiz("data/Cauhoimau2.txt")
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println(quizzes)
 
 	app.RegisterView(iris.HTML("./view", ".html").Reload(true))
 	app.Get("/", func(ctx iris.Context) {

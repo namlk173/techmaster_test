@@ -1,0 +1,59 @@
+Which SQL keyword is used to select data from a table in MySQL?
+a) SELECT
+b) FROM
+c) WHERE
+Answer: a
+
+Which keyword is used to filter data in a MySQL query?
+a) SELECT
+b) FROM
+c) WHERE
+Answer: c
+
+Which SQL keyword is used to order data in a MySQL query?
+a) ORDER BY
+b) GROUP BY
+c) HAVING
+Answer: a
+
+Which keyword is used to limit the number of results returned by a MySQL query?
+a) LIMIT
+b) OFFSET
+c) COUNT
+Answer: a
+
+Which SQL function is used to count the number of rows in a MySQL table?
+a) COUNT(*)
+b) SUM()
+c) AVG()
+Answer: a
+
+Which keyword is used to join two or more tables in a MySQL query?
+a) JOIN
+b) UNION
+c) INTERSECT
+Answer: a
+
+Which SQL function is used to return the maximum value in a column in a MySQL table?
+a) MAX()
+b) MIN()
+c) AVG()
+Answer: a
+
+Which keyword is used to insert data into a MySQL table?
+a) INSERT
+b) UPDATE
+c) DELETE
+Answer: a
+
+Which SQL keyword is used to update data in a MySQL table?
+a) UPDATE
+b) INSERT
+c) DELETE
+Answer: a
+
+Which keyword is used to delete data from a MySQL table?
+a) DELETE
+b) UPDATE
+c) INSERT
+Answer: a
